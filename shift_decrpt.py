@@ -1,22 +1,25 @@
-# KEY = 3
+KEY = 3
 
-# def enc(s, k)
-#     s = s.upper()
-#     e = ''.join(chr(ord(i) + k) for i in s)
-#     return e
+def enc(s, k):
+    s = s.upper()
+    e = ''.join(chr(ord(i) + k) for i in s)
+    return e
 
 def dec(s, k):
     s = s.upper()
     d = ''.join(chr(ord(i) - k) for i in s)
     return d
     
-# e = enc(input("ENTER TEXT: ").strip(), KEY)
-# print(e)
-e_text = 'WKLV LV D VHFUHW PHVVDjh WHDW QHHGV WR EH NHSW FRQILGHQWLDODO DQG VDIH'
-for i in e.split(): 
+e = ''
+e_text = enc('hello now run', KEY).split('#')
+
+
+print(e_text)
+for i in e_text:
     if len(i) == 3:
+        print(i)
         e = i
-    break
+        break
 
 def find_diff(s):
     d = 0
@@ -28,16 +31,18 @@ def find_diff(s):
     return d
     
 
-file = open('words_all.txt', 'r')
-
-words = []
 
 found = ''
-for i in words:
-    if find_diff(e) == find_diff(i):
-        found = i
-        break 
+file = open('wordlist_threes.txt', 'r')
+text = file.readlines()
+
+for word in text:
+        if find_diff(e) == find_diff(word.strip()):
+            found = word
+            break 
     
+print(found)
+
 if found:
     fkey = ord(e[0]) - ord(found[0])
     print("KEY:", fkey)
